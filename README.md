@@ -2,51 +2,52 @@
 
 ## What is this?
 
-remop is a CLI to read 1Password secrets over a SSH tunnel.
+remop is a CLI tool to read 1Password secrets over an SSH tunnel.
 
-It creates two unix domain sockets, one on the remote server and the other
+It creates two Unix domain sockets: one on the remote server and the other
 on the local host.
 
-The unix domain socket on the remote server is only readable and writable by
-the remote user who logins to the server by executing `remop tunnel` command.
+The Unix domain socket on the remote server is readable and writable only by
+the remote user who logs in to the server by executing the `remop tunnel`
+command.
 
-You can run `remop read` on the remote server to get the value of the item URL
-specified in the command line argument.
+You can run `remop read` on the remote server to get the value for the item
+URL specified as a command-line argument.
 
-Then the access request dialog of the 1Password app is prompted, and you can
-get the value after you accept the request.
+Then an access request dialog appears in the 1Password app, and you can get
+the value after you approve the request.
 
-The config file for the local host has the allow list of item URLs, so you
-can limit items which `remop read` can access. This lowers the risk you allow
-the unexpected item by mistake.
+The config file on the local host has an allow list of item URLs, so you can
+restrict which items `remop read` can access. This lowers the risk of
+accidentally allowing an unexpected item.
 
 ## Setup
 
-### local host
- 
-Put the `remop` executable on the PATH.
+### Local host
+
+Put the `remop` executable on your `PATH`.
 Copy `remop.example.json` to `remop.json` and edit it for your environment.
 
-### remote server
+### Remote server
 
-Put the `remop` executable on the PATH.
+Put the `remop` executable on your `PATH`.
 Set the `REMOP_SOCKET` environment variable to the same value as
-`local.socket_path` in `remop.json` on the local host.
+`local.socket_path` in the local host's `remop.json`.
 
 ## Usage
 
-### local host
+### Local host
 
-Run `remop tunnel` to create the SSH tunnel to the target server.
-
-```
-remop tunnel _YOUR_TARGET_HOST_HERE_
-```
-
-### remote server
-
-Run `remop read` to get the value by the specified item URL.
+Run `remop tunnel` to create an SSH tunnel to the target server.
 
 ```
-remop read op://<_your_vault_id_here>/<_your_item_id_here_>/<_field_id_here_>
+remop tunnel <your_target_host>
+```
+
+### Remote server
+
+Run `remop read` to get the value for the specified item URL.
+
+```
+remop read op://<your_vault_id>/<your_item_id>/<your_field_id>
 ```
