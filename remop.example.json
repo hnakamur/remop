@@ -1,0 +1,13 @@
+{
+  "local": {
+    "socket_path": "/home/hnakamur/.local/state/remop.sock",
+    "ssh_path": "ssh",
+    "op_path": "op.exe",
+    "allowed_item_urls": [
+      "op://<_your_vault_id_here_>/<_your_item_id_here_>/password"
+    ]
+  },
+  "remote": {
+    "socket_path": "/home/hnakamur/.local/state/remop.sock"
+  }
+}

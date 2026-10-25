@@ -1,0 +1,20 @@
+[tasks.build]
+run = '''
+go build -trimpath -tags netgo,osusergo
+'''
+
+[tasks.deploy]
+usage = '''
+arg "<host>" help="target remote host"
+'''
+run = '''
+rsync -av remop ${usage_host}:.local/bin/
+'''
+
+[tasks.tunnel]
+usage = '''
+arg "<host>" help="target remote host"
+'''
+run = '''
+./remop tunnel -debug ${usage_host}
+'''
